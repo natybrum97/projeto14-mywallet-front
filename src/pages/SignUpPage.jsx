@@ -19,28 +19,34 @@ export default function SignUpPage() {
     const obj = {
       name: name,
       email: email,
-      password: senha,
-      confirmar: confirmar
+      password: senha
     }
 
-    const apiUrl = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+    if(senha === confirmar){
 
-    const promise = axios.post(apiUrl, obj);
+      const apiUrl = "http://localhost:5000/cadastro";
 
-    promise.then(resposta => {
+      const promise = axios.post(apiUrl, obj);
+  
+      promise.then(resposta => {
+  
+        alert('Você foi cadastrado com sucesso!')
+        console.log(resposta.data);
+        navigate("/");
+  
+      });
+  
+      promise.catch(erro => {
+      
+        console.log(erro.response.data);
+        alert(erro.response.data.message || erro.response.data);
+  
+      });
+    } else {
+      alert("As senhas disponibilizadas não são iguais!")
+    }
 
-      alert('Você foi cadastrado com sucesso!')
-      console.log(resposta.data);
-      navigate("/");
-
-    });
-
-    promise.catch(erro => {
     
-      console.log(erro.response.data);
-      alert(erro.response.data.message);
-
-    });
   }
 
   return (

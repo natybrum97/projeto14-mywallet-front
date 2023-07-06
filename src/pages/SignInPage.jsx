@@ -3,12 +3,16 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
 import axios from "axios";
+import { LoginContext } from "../Contexts/LoginContext";
+import { useContext } from "react";
 
 export default function SignInPage() {
 
+  const { login, setLogin } = useContext(LoginContext);
+    console.log(login, "aqui");
+
   const navigate = useNavigate();
 
-  const [login, setLogin] = useState({});
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -16,30 +20,30 @@ export default function SignInPage() {
     e.preventDefault();
 
     const obj = {
-        email: email,
-        password: senha
+      email: email,
+      password: senha
     }
 
 
-    const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
+    const url = "http://localhost:5000/";
 
     const promise = axios.post(url, obj);
 
     promise.then(resposta => {
-       
-        setLogin(resposta.data);
-        console.log(resposta.data, "lista");
-        navigate("/home");
+
+      setLogin(resposta.data);
+      console.log(resposta.data, "lista");
+      navigate("/home");
 
     });
 
     promise.catch(erro => {
-        
-        alert('Usuário e/ou senha inválidos!');
-        console.log(erro.response.data);
+
+      alert('Usuário e/ou senha inválidos!');
+      console.log(erro.response.data);
     });
 
-}
+  }
 
   return (
     <SingInContainer>
@@ -49,7 +53,7 @@ export default function SignInPage() {
         <MyWalletLogo />
         <input placeholder="E-mail" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <input placeholder="Senha" type="password" autoComplete="new-password" id="senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
-        <button>Entrar</button>
+        <button type="submit">Entrar</button>
 
       </form>
 
