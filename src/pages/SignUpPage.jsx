@@ -54,11 +54,11 @@ export default function SignUpPage() {
       <form onSubmit={enviarInfos}>
 
         <MyWalletLogo />
-        <input placeholder="Nome" type="text" id="nome" value={name} onChange={(e) => setName(e.target.value)} required />
-        <input placeholder="E-mail" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input placeholder="Senha" type="password" autoComplete="new-password" id="senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
-        <input placeholder="Confirme a senha" type="password" autoComplete="new-password" id="confirmar" value={confirmar} onChange={(e) => setConfirmar(e.target.value)} required />
-        <button type="submit">Cadastrar</button>
+        <input data-test="name" placeholder="Nome" type="text" id="nome" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input data-test="email" placeholder="E-mail" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input data-test="password" placeholder="Senha" type="password" autoComplete="new-password" id="senha" value={senha} onChange={(e) => setSenha(e.target.value)} required />
+        <input data-test="conf-password" placeholder="Confirme a senha" type="password" autoComplete="new-password" id="confirmar" value={confirmar} onChange={(e) => setConfirmar(e.target.value)} required />
+        <button data-test="sign-up-submit" type="submit">Cadastrar</button>
 
       </form>
 
