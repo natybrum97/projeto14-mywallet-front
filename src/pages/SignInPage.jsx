@@ -25,9 +25,9 @@ export default function SignInPage() {
     }
 
 
-    const url = "http://localhost:5000/";
+    const url = "";
 
-    const promise = axios.post(url, obj);
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/`, obj);
 
     promise.then(resposta => {
 
