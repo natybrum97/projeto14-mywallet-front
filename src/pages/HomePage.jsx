@@ -44,7 +44,7 @@ export default function HomePage(props) {
 
       <ButtonsContainer>
 
-        <button onClick={() => {
+        <button data-test="new-income" onClick={() => {
                 setTela1(true);
                 setTela2(false);
                 navigate("/nova-transacao/entrada");
@@ -53,7 +53,7 @@ export default function HomePage(props) {
           <p>Nova <br /> entrada</p>
         </button>
 
-        <button onClick={() => {
+        <button data-test="new-expense" onClick={() => {
                 setTela1(false);
                 setTela2(true);
                 navigate("/nova-transacao/saida");

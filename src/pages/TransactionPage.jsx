@@ -2,11 +2,14 @@ import styled from "styled-components"
 import { LoginContext } from "../Contexts/LoginContext";
 import { useContext, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function TransactionsPage(props) {
 
   const { login } = useContext(LoginContext);
-  const token = login.token;
+  const token = login;
+
+  const navigate = useNavigate();
 
   const { tela1, setTela1, tela2, setTela2 } = props
 
@@ -25,17 +28,21 @@ export default function TransactionsPage(props) {
   }
   console.log(config)
 
-    let url = "";
+    let rota = "";
 
     if (tela1) {
-      url = "http://localhost:5000/nova-transacao/entrada";
+
+      rota = "entrada";
+      
     }
 
     if (tela2) {
-      url = "http://localhost:5000/nova-transacao/saida";
+
+      rota = "saida";
+    
     }
 
-    const promise = axios.post(url, obj);
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${rota}`, obj,config);
 
     promise.then(resposta => {
 
@@ -75,18 +82,18 @@ export default function TransactionsPage(props) {
 
       <form onSubmit={enviarInfos}>
 
-        <input placeholder="Valor" type="text" id="valor" value={valor} onChange={(e) => setValor(e.target.value)} required />
-        <input placeholder="Descrição" type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+        <input data-test="registry-amount-input" placeholder="Valor" type="text" id="valor" value={valor} onChange={(e) => setValor(e.target.value)} required />
+        <input data-test="registry-name-input" placeholder="Descrição" type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
 
         {tela1 && (
 
-          <button type="submit">Salvar entrada</button>
+          <button data-test="registry-save" type="submit">Salvar entrada</button>
 
         )}
 
         {tela2 && (
 
-          <button type="submit">Salvar saída</button>
+          <button data-test="registry-save" type="submit">Salvar saída</button>
 
         )}
 
