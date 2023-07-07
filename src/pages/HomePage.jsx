@@ -30,6 +30,7 @@ export default function HomePage(props) {
     }
   });
 
+  const saldo = totalEntradas - totalSaidas;
   const saldoFinal = (totalEntradas - totalSaidas).toFixed(2).replace(".", ",");
 
 
@@ -99,7 +100,7 @@ export default function HomePage(props) {
 
           <article>
             <strong>Saldo</strong>
-            <Value2 data-test="total-amount" total={saldoFinal}>{saldoFinal}</Value2>
+            <Value2 data-test="total-amount" total={saldo}>{saldoFinal}</Value2>
           </article>
 
         </TransactionsContainer>
