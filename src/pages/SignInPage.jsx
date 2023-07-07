@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 export default function SignInPage() {
 
-  const { login, setLogin } = useContext(LoginContext);
+  const { login, setLogin, setTela3, setUser } = useContext(LoginContext);
     console.log(login, "aqui");
 
   const navigate = useNavigate();
@@ -31,7 +31,9 @@ export default function SignInPage() {
 
     promise.then(resposta => {
 
-      setLogin(resposta.data);
+      setLogin(resposta.data.token);
+      setUser(resposta.data.nome);
+      setTela3(true);
       console.log(resposta.data, "lista");
       navigate("/home");
 

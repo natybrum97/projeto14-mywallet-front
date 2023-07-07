@@ -11,7 +11,7 @@ export default function TransactionsPage(props) {
 
   const navigate = useNavigate();
 
-  const { tela1, setTela1, tela2, setTela2 } = props
+  const { tela1, tela2 } = props
 
   const [valor, setValor] = useState('');
   const [description, setDescription] = useState('');
