@@ -28,7 +28,8 @@ export default function HomePage(props) {
     }
   });
 
-  const saldoFinal = totalEntradas - totalSaidas;
+  const saldoFinal = (totalEntradas - totalSaidas).toFixed(2).replace(".", ",");
+
 
   useEffect(() => {
 
@@ -86,7 +87,7 @@ export default function HomePage(props) {
                   <span>{transacao.data}</span>
                   <strong data-test="registry-name">{transacao.description}</strong>
                 </div>
-                <Value data-test="registry-amount" color={transacao.tipo}>{transacao.valor}</Value>
+                <Value data-test="registry-amount" color={transacao.tipo}>{transacao.valor.replace(".", ",")}</Value>
               </ListItemContainer>
 
             )
