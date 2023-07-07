@@ -24,9 +24,6 @@ export default function SignInPage() {
       password: senha
     }
 
-
-    const url = "";
-
     const promise = axios.post(`${import.meta.env.VITE_API_URL}/`, obj);
 
     promise.then(resposta => {

@@ -15,7 +15,9 @@ export default function HomePage(props) {
 
   const navigate = useNavigate();
 
-  console.log(tela3, listadeTransacoes.length);
+  console.log(tela3, listadeTransacoes.length, listadeTransacoes);
+
+  const arrayInvertido = listadeTransacoes.map((objeto, index) => listadeTransacoes[listadeTransacoes.length - 1 - index]);
 
   let totalEntradas = 0;
   let totalSaidas = 0;
@@ -80,7 +82,7 @@ export default function HomePage(props) {
         <TransactionsContainer>
 
           <Lista>
-            {listadeTransacoes.map((transacao) => (
+            {arrayInvertido.map((transacao) => (
 
               <ListItemContainer key={transacao._id}>
                 <div>
