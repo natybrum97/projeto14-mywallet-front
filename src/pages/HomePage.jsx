@@ -8,7 +8,7 @@ import axios from "axios"
 
 export default function HomePage(props) {
 
-  const { login, listadeTransacoes, setListadeTransacoes, tela3, user } = useContext(LoginContext);
+  const { login, listadeTransacoes, setListadeTransacoes, tela3, user, transacao, setTransacao } = useContext(LoginContext);
   const token = login;
 
   const { setTela1, setTela2 } = props
@@ -60,6 +60,28 @@ export default function HomePage(props) {
           console.error(error);
         });
     }
+  };
+
+  function atualizaItem(transacaoId){
+
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      },
+    };
+
+      axios.get(`${import.meta.env.VITE_API_URL}/transacao/${transacaoId}`, config)
+
+        .then((response) => {
+
+          console.log(response.data);
+          setTransacao(response.data);
+          navigate("/editar-registro/:tipo/:id");
+          
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   };
 
 
@@ -117,7 +139,7 @@ export default function HomePage(props) {
               <ListItemContainer key={transacao._id}>
                 <div>
                   <span>{transacao.data}</span>
-                  <strong data-test="registry-name">{transacao.description}</strong>
+                  <strong data-test="registry-name" onClick={() => atualizaItem(transacao._id)}>{transacao.description}</strong>
                 </div>
                 <DivMaior>
                   <Value data-test="registry-amount" color={transacao.tipo}>{transacao.valor.replace(".", ",")}</Value>
