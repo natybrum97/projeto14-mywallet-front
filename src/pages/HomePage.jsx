@@ -33,6 +33,35 @@ export default function HomePage(props) {
   const saldo = totalEntradas - totalSaidas;
   const saldoFinal = (totalEntradas - totalSaidas).toFixed(2).replace(".", ",");
 
+  function deleteItem(transacaoId){
+
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token
+      },
+    };
+  
+    const confirmacao = window.confirm("Tem certeza de que deseja excluir?");
+  
+    if (confirmacao) {
+
+      axios.delete(`${import.meta.env.VITE_API_URL}/home/${transacaoId}`, config)
+
+        .then((response) => {
+
+          console.log(response.data);
+          const novaLista = listadeTransacoes.filter(
+            (transacao) => transacao._id !== transacaoId
+          );
+          setListadeTransacoes(novaLista);
+          
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
+
 
   useEffect(() => {
 
@@ -90,7 +119,10 @@ export default function HomePage(props) {
                   <span>{transacao.data}</span>
                   <strong data-test="registry-name">{transacao.description}</strong>
                 </div>
-                <Value data-test="registry-amount" color={transacao.tipo}>{transacao.valor.replace(".", ",")}</Value>
+                <DivMaior>
+                  <Value data-test="registry-amount" color={transacao.tipo}>{transacao.valor.replace(".", ",")}</Value>
+                  <Delete onClick={() => deleteItem(transacao._id)}>x</Delete>
+                </DivMaior>
               </ListItemContainer>
 
             )
@@ -145,6 +177,21 @@ const SemRegistros = styled.p`
   letter-spacing: 0em;
   text-align: center;
   color:#868686;
+`
+const DivMaior = styled.div`
+  display:flex;
+  justify-content: space-between;
+  width:80px;
+`
+const Delete = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  display:flex;
+  justify-content: flex-start;
+  cursor: pointer;
 `
 
 const HomeContainer = styled.div`
@@ -214,6 +261,7 @@ const ButtonsContainer = styled.section`
   }
 `
 const Value = styled.div`
+  line-height: 19px;
   font-size: 16px;
   text-align: right;
   color: ${(props) => (props.color === "entrada" ? "green" : "red")};
