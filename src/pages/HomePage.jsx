@@ -121,7 +121,7 @@ export default function HomePage(props) {
                 </div>
                 <DivMaior>
                   <Value data-test="registry-amount" color={transacao.tipo}>{transacao.valor.replace(".", ",")}</Value>
-                  <Delete onClick={() => deleteItem(transacao._id)}>x</Delete>
+                  <Delete data-test="registry-delete" onClick={() => deleteItem(transacao._id)}>x</Delete>
                 </DivMaior>
               </ListItemContainer>
 
