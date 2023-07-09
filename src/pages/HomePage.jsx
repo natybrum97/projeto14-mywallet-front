@@ -76,7 +76,7 @@ export default function HomePage(props) {
 
           console.log(response.data);
           setTransacao(response.data);
-          navigate("/editar-registro/:tipo/:id");
+          navigate(`/editar-registro/${response.data.tipo}/:${transacaoId}`);
           
         })
         .catch((error) => {
