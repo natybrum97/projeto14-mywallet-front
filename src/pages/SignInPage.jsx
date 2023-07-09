@@ -32,7 +32,6 @@ export default function SignInPage() {
       setUser(resposta.data.nome);
       setTela3(true);
       console.log(resposta.data, "lista");
-      localStorage.setItem("token", resposta.data.token)
       navigate("/home");
 
     });

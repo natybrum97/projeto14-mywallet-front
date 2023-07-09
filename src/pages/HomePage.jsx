@@ -33,13 +33,6 @@ export default function HomePage(props) {
   const saldo = totalEntradas - totalSaidas;
   const saldoFinal = (totalEntradas - totalSaidas).toFixed(2).replace(".", ",");
 
-  const Logout = () => {
-    
-    localStorage.removeItem("token");
-    navigate("/");
-
-  };
-
 
   useEffect(() => {
 
@@ -69,13 +62,8 @@ export default function HomePage(props) {
   return (
     <HomeContainer>
       <Header>
-
         <h1>Olá, <span data-test="user-name">{user}</span></h1>
-
-        <LogoutButton data-test="logout" onClick={Logout}>
-          <BiExit />
-        </LogoutButton>
-
+        <BiExit />
       </Header>
 
 
@@ -172,10 +160,6 @@ const Header = styled.header`
   margin-bottom: 15px;
   font-size: 26px;
   color: white;
-
-  h1{
-    width:120px;
-  }
 `
 const TransactionsContainer = styled.article`
   height:100%;
@@ -229,17 +213,6 @@ const ButtonsContainer = styled.section`
     }
   }
 `
-
-const LogoutButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  display:flex;
-  justify-content:flex-end;
-`;
-
 const Value = styled.div`
   font-size: 16px;
   text-align: right;
