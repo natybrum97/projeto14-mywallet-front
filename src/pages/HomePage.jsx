@@ -10,7 +10,9 @@ export default function HomePage(props) {
 
   const {listadeTransacoes, setListadeTransacoes, setTransacao, isLoged, logout } = useContext(LoginContext);
 
-  isLoged();
+  useEffect(() => {
+    isLoged();
+  })
 
   const { setTela1, setTela2 } = props
 

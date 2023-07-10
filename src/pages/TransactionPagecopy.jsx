@@ -3,12 +3,15 @@ import { LoginContext } from "../Contexts/LoginContext";
 import { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function TransactionsPagecopy() {
 
   const { login, transacao, setTransacao, isLoged } = useContext(LoginContext);
  
-  isLoged();
+  useEffect(() => {
+    isLoged();
+  })
 
   const navigate = useNavigate();
 

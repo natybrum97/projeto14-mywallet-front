@@ -3,13 +3,16 @@ import { LoginContext } from "../Contexts/LoginContext";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function TransactionsPage(props) {
 
   const {isLoged } = useContext(LoginContext);
 
 
-  isLoged();
+  useEffect(() => {
+    isLoged();
+  })
 
   const navigate = useNavigate();
 
