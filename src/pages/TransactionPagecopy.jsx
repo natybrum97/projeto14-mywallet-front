@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function TransactionsPagecopy() {
 
-  const { login, transacao, setTransacao } = useContext(LoginContext);
-  const token = login;
+  const { transacao, setTransacao, isLoged } = useContext(LoginContext);
+ 
+  isLoged();
 
   const navigate = useNavigate();
 
@@ -26,15 +27,9 @@ export default function TransactionsPagecopy() {
       description: transacao.description
     };
   
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
-    };
-  
     const url = `${import.meta.env.VITE_API_URL}/editar-registro/${transacao.tipo}/${transacao._id}`;
   
-    axios.put(url, obj, config)
+    axios.put(url, obj)
       .then(response => {
         alert(`${tipo} atualizada com sucesso!`);
         navigate('/home');

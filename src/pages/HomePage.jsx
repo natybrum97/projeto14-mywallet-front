@@ -8,14 +8,15 @@ import axios from "axios"
 
 export default function HomePage(props) {
 
-  const { login, listadeTransacoes, setListadeTransacoes, tela3, user, transacao, setTransacao } = useContext(LoginContext);
-  const token = login;
+  const {listadeTransacoes, setListadeTransacoes, setTransacao, isLoged, logout } = useContext(LoginContext);
+
+  isLoged();
 
   const { setTela1, setTela2 } = props
 
   const navigate = useNavigate();
 
-  console.log(tela3, listadeTransacoes.length, listadeTransacoes);
+  console.log(listadeTransacoes.length, listadeTransacoes);
 
   const arrayInvertido = listadeTransacoes.map((objeto, index) => listadeTransacoes[listadeTransacoes.length - 1 - index]);
 
@@ -34,18 +35,12 @@ export default function HomePage(props) {
   const saldoFinal = Math.abs(totalEntradas - totalSaidas).toFixed(2).replace(".", ",");
 
   function deleteItem(transacaoId){
-
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      },
-    };
   
     const confirmacao = window.confirm("Tem certeza de que deseja excluir?");
   
     if (confirmacao) {
 
-      axios.delete(`${import.meta.env.VITE_API_URL}/home/${transacaoId}`, config)
+      axios.delete(`${import.meta.env.VITE_API_URL}/home/${transacaoId}`)
 
         .then((response) => {
 
@@ -64,13 +59,7 @@ export default function HomePage(props) {
 
   function atualizaItem(transacaoId){
 
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      },
-    };
-
-      axios.get(`${import.meta.env.VITE_API_URL}/transacao/${transacaoId}`, config)
+      axios.get(`${import.meta.env.VITE_API_URL}/transacao/${transacaoId}`)
 
         .then((response) => {
 
@@ -87,13 +76,7 @@ export default function HomePage(props) {
 
   useEffect(() => {
 
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    }
-
-    const promise = axios.get(`${import.meta.env.VITE_API_URL}/home`, config);
+    const promise = axios.get(`${import.meta.env.VITE_API_URL}/home`);
 
     promise.then((resposta) => {
 
@@ -113,14 +96,14 @@ export default function HomePage(props) {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, <span data-test="user-name">{user}</span></h1>
-        <BiExit />
+        <h1>Olá, <span data-test="user-name">{localStorage.getItem("user")}</span></h1>
+        <BiExit onClick={() => logout()}/>
       </Header>
 
 
 
 
-      {tela3 && !listadeTransacoes.length && (
+      {!listadeTransacoes.length && (
         <TransactionsContainer2>
 
           <SemRegistros>Não há registros de entrada ou saída</SemRegistros>
@@ -129,7 +112,7 @@ export default function HomePage(props) {
 
       )}
 
-      {tela3 && listadeTransacoes.length > 0 && (
+      {listadeTransacoes.length > 0 && (
 
         <TransactionsContainer>
 

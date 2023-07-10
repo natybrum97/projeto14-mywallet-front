@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 export default function SignInPage() {
 
-  const { login, setLogin, setTela3, setUser } = useContext(LoginContext);
+  const { login, setLogin } = useContext(LoginContext);
     console.log(login, "aqui");
 
   const navigate = useNavigate();
@@ -27,10 +27,11 @@ export default function SignInPage() {
     const promise = axios.post(`${import.meta.env.VITE_API_URL}/`, obj);
 
     promise.then(resposta => {
+      localStorage.setItem("token", resposta.data.token);
+      console.log(localStorage.getItem("token"))
+      localStorage.setItem("user", resposta.data.nome);
 
       setLogin(resposta.data.token);
-      setUser(resposta.data.nome);
-      setTela3(true);
       console.log(resposta.data, "lista");
       navigate("/home");
 

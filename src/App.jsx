@@ -6,6 +6,7 @@ import SignUpPage from "./pages/SignUpPage"
 import TransactionsPage from "./pages/TransactionPage"
 import TransactionsPagecopy from "./pages/TransactionPagecopy"
 import { useState } from "react"
+import { LoginProvider } from "./Contexts/LoginContext.jsx"
 
 export default function App() {
 
@@ -15,13 +16,15 @@ export default function App() {
   return (
     <PagesContainer>
       <BrowserRouter>
-        <Routes>
+      <LoginProvider>
+      <Routes>
           <Route path="/" element={<SignInPage />} />
           <Route path="/cadastro" element={<SignUpPage />} />
           <Route path="/home" element={<HomePage tela1={tela1} setTela1={setTela1} tela2={tela2} setTela2={setTela2} />} />
           <Route path="/nova-transacao/:tipo" element={<TransactionsPage tela1={tela1} setTela1={setTela1} tela2={tela2} setTela2={setTela2} />} />
           <Route path="/editar-registro/:tipo/:id" element={<TransactionsPagecopy />} />
         </Routes>
+      </LoginProvider>
       </BrowserRouter>
     </PagesContainer>
   )
