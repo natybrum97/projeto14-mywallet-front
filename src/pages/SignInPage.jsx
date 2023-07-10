@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
@@ -7,6 +7,9 @@ import { LoginContext } from "../Contexts/LoginContext";
 import { useContext } from "react";
 
 export default function SignInPage() {
+
+  const { login, setLogin } = useContext(LoginContext);
+    console.log(login, "aqui");
 
   const navigate = useNavigate();
 
@@ -27,6 +30,9 @@ export default function SignInPage() {
       localStorage.setItem("token", resposta.data.token);
       console.log(localStorage.getItem("token"))
       localStorage.setItem("user", resposta.data.nome);
+
+      setLogin(resposta.data.token);
+      console.log(resposta.data, "lista");
       navigate("/home");
 
     });

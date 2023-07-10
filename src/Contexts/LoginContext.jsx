@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -21,13 +21,6 @@ export function LoginProvider({ children }) {
             navigate("/");
         }
     }
-
-    useEffect(() => {
-        let token = localStorage.getItem("token");
-        if(token === null || token === undefined){
-            navigate("/");
-        }
-    }, []);
 
     const logout = () => {
         localStorage.removeItem("token");
