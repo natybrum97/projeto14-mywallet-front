@@ -15,7 +15,7 @@ export default function TransactionsPage(props) {
 
   const { tela1, tela2 } = props
 
-  const [valor, setValor] = useState('');
+  const [valor, setValor] = useState(0.0);
   const [description, setDescription] = useState('');
 
   function enviarInfos(e) {
