@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -29,13 +29,7 @@ export function LoginProvider({ children }) {
         axios.defaults.headers.common['Authorization'] = "";
         navigate("/");
     }
-
-    useEffect(() => {
-        let token = localStorage.getItem("token");
-        if((token === undefined || token === null) && location.pathname !== "/"){
-            navigate("/");
-        }
-    })
+   
 
 
     return (
