@@ -31,7 +31,7 @@ export default function HomePage(props) {
   });
 
   const saldo = totalEntradas - totalSaidas;
-  const saldoFinal = (totalEntradas - totalSaidas).toFixed(2).replace(".", ",");
+  const saldoFinal = Math.abs(totalEntradas - totalSaidas).toFixed(2).replace(".", ",");
 
   function deleteItem(transacaoId){
 
