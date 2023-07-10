@@ -9,7 +9,9 @@ import { useContext } from "react";
 export default function SignInPage() {
 
   const { login, setLogin } = useContext(LoginContext);
+
     console.log(login, "aqui");
+
 
   const navigate = useNavigate();
 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function TransactionsPagecopy() {
 
-  const { transacao, setTransacao, isLoged } = useContext(LoginContext);
+  const { login, transacao, setTransacao, isLoged } = useContext(LoginContext);
  
   isLoged();
 
