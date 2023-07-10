@@ -77,7 +77,7 @@ export default function TransactionsPage(props) {
 
       <form onSubmit={enviarInfos}>
 
-        <input data-test="registry-amount-input" placeholder="Valor" type="text" id="number" value={valor} onChange={(e) => setValor(e.target.value)} required />
+        <input data-test="registry-amount-input" placeholder="Valor" type="number" id="valor" value={valor} onChange={(e) => setValor(e.target.value)} required />
         <input data-test="registry-name-input" placeholder="Descrição" type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
 
         {tela1 && (
