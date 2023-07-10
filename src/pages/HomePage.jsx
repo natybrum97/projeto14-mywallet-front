@@ -97,7 +97,7 @@ export default function HomePage(props) {
     <HomeContainer>
       <Header>
         <h1>Olá, <span data-test="user-name">{localStorage.getItem("user")}</span></h1>
-        <BiExit onClick={() => logout()}/>
+        <BiExit data-test="logout" onClick={() => logout()}/>
       </Header>
 
 
